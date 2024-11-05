@@ -65,8 +65,29 @@
                    
                    <label for="house-number">House Number:</label><br>
                    <input type="text" id="house-number" name="house-number" placeholder="123" pattern="\d+" title="Please enter a valid house number"><br><br>
+                   
+                   <label for="payment-method">Payment Method:</label><br>
+                   <select id="payment-method" name="payment-method">
+                       <option value="credit-card" selected>Credit Card</option>
+                       <option value="paypal">PayPal</option>
+                       <option value="bank-transfer">Bank Transfer</option>
+                       <option value="cash-on-delivery">Cash on Delivery</option>
+                   </select><br><br>
+                   
+                   <label>Gender:</label><br>
+                   <input type="radio" id="male" name="gender" value="male" checked>
+                   <label for="male">Male</label><br>
+                   <input type="radio" id="female" name="gender" value="female">
+                   <label for="female">Female</label><br>
+                   <input type="radio" id="no-gender" name="gender" value="no-gender">
+                   <label for="no-gender">Do not wish to provide</label><br><br>
                </form>
            </section>
+           
+        <button type="submit">
+            <img src="public/img/order.png" alt="Order" style="width: 20px; height: 20px;">
+            Submit Order
+        </button>
        </main>
        <hr>
        <footer>
