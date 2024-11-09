@@ -1,101 +1,13 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-   <head>
-       <title>Hampus's Hamburgers</title>
-       <meta charset="utf-8"/>
-       <link rel="stylesheet" href="public/css/style.css">
-   </head>
-   <body>
-       <header>
-           <div class="header-content">
-               <h1>Welcome to Hampus's Hamburgers</h1>
-               <img src="public/img/background.png" alt="Header Image">
-           </div>
-       </header>
-       
-       <main>
-           <section id="burger-selection">
-               <h2>Select Your Burger</h2>
-               <p>Choose from our wide variety of delicious burgers to satisfy your cravings.</p>
-               
-               <div>
-                   <h3>The Vegan Burger</h3>
-                   <img src="public/img/veganburger.png" alt="The Vegan Burger">
-                   <ul>
-                       <li><span class="ingredient">Contains no gluten</span></li>
-                       <li><span class="ingredient">Contains no lactose</span></li>
-                       <li>Made with organic ingredients</li>
-                       <li>Rich in protein and fiber</li>
-                   </ul>
-               </div>
-               
-               <div>
-                   <h3>The Classic Burger</h3>
-                   <img src="public/img/classicburger.png" alt="The Classic Burger">
-                   <ul>
-                       <li><span class="ingredient">Contains gluten</span></li>
-                       <li><span class="ingredient">Contains lactose</span></li>
-                       <li>100% beef patty</li>
-                       <li>Served with fresh lettuce and tomatoes</li>
-                   </ul>
-               </div>
-               
-               <div>
-                   <h3>The Halloumi Burger</h3>
-                   <img src="public/img/halloumiburger.png" alt="The Halloumi Burger">
-                   <ul>
-                       <li><span class="ingredient">Contains gluten</span></li>
-                       <li><span class="ingredient">Contains lactose</span></li>
-                       <li>Loaded with cheddar cheese</li>
-                       <li>Served with pickles and onions</li>
-                   </ul>
-               </div>
-           </section>
-           
-           <section id="customer-information">
-               <h2>Customer Information</h2>
-               <p>Provide your delivery address and contact details to ensure a smooth delivery process.</p>
-               <h3>Delivery Information</h3>
-               
-               <form>
-                   <label for="name">First and Last Name:</label><br>
-                   <input type="text" id="name" name="name" placeholder="John Doe"><br><br>
-                   
-                   <label for="email">E-mail Address:</label><br>
-                   <input type="email" id="email" name="email" placeholder="john.doe@example.com"><br><br>
-                   
-                   <label for="street">Street:</label><br>
-                   <input type="text" id="street" name="street" placeholder="123 Main St"><br><br>
-                   
-                   <label for="house-number">House Number:</label><br>
-                   <input type="text" id="house-number" name="house-number" placeholder="123" pattern="\d+" title="Please enter a valid house number"><br><br>
-                   
-                   <label for="payment-method">Payment Method:</label><br>
-                   <select id="payment-method" name="payment-method">
-                       <option value="credit-card" selected>Credit Card</option>
-                       <option value="paypal">PayPal</option>
-                       <option value="bank-transfer">Bank Transfer</option>
-                       <option value="cash-on-delivery">Cash on Delivery</option>
-                   </select><br><br>
-                   
-                   <label>Gender:</label><br>
-                   <input type="radio" id="male" name="gender" value="male" checked>
-                   <label for="male">Male</label><br>
-                   <input type="radio" id="female" name="gender" value="female">
-                   <label for="female">Female</label><br>
-                   <input type="radio" id="no-gender" name="gender" value="no-gender">
-                   <label for="no-gender">Do not wish to provide</label><br><br>
-               </form>
-           </section>
-           
-           <button type="submit">
-               <img src="public/img/order.png" alt="Order" style="width: 20px; height: 20px;">
-               Submit Order
-           </button>
-       </main>
-       <hr>
-       <footer>
-           <p>&copy; 2024 Hampus's Hamburgers. All rights reserved.</p>
-       </footer>
-   </body>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
