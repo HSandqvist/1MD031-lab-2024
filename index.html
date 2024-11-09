@@ -3,52 +3,56 @@
    <head>
        <title>Hampus's Hamburgers</title>
        <meta charset="utf-8"/>
+       <link rel="stylesheet" href="public/css/style.css">
    </head>
    <body>
        <header>
-           <h1>Welcome to Hampus's Hamburgers</h1>
+           <div class="header-content">
+               <h1>Welcome to Hampus's Hamburgers</h1>
+               <img src="public/img/background.png" alt="Header Image">
+           </div>
        </header>
        
        <main>
-           <section>
+           <section id="burger-selection">
                <h2>Select Your Burger</h2>
                <p>Choose from our wide variety of delicious burgers to satisfy your cravings.</p>
                
-               <div style="display: inline-block; width: 30%; vertical-align: top; margin: 1%;">
+               <div>
                    <h3>The Vegan Burger</h3>
-                   <img src="public/img/veganburger.png" alt="The Vegan Burger" style="width:100%;height:auto;">
+                   <img src="public/img/veganburger.png" alt="The Vegan Burger">
                    <ul>
-                       <li>Contains no gluten</li>
-                       <li>Contains no lactose</li>
+                       <li><span class="ingredient">Contains no gluten</span></li>
+                       <li><span class="ingredient">Contains no lactose</span></li>
                        <li>Made with organic ingredients</li>
                        <li>Rich in protein and fiber</li>
                    </ul>
                </div>
                
-               <div style="display: inline-block; width: 30%; vertical-align: top; margin: 1%;">
+               <div>
                    <h3>The Classic Burger</h3>
-                   <img src="public/img/classicburger.png" alt="The Classic Burger" style="width:100%;height:auto;">
+                   <img src="public/img/classicburger.png" alt="The Classic Burger">
                    <ul>
-                       <li>Contains gluten</li>
-                       <li>Contains lactose</li>
+                       <li><span class="ingredient">Contains gluten</span></li>
+                       <li><span class="ingredient">Contains lactose</span></li>
                        <li>100% beef patty</li>
                        <li>Served with fresh lettuce and tomatoes</li>
                    </ul>
                </div>
                
-               <div style="display: inline-block; width: 30%; vertical-align: top; margin: 1%;">
+               <div>
                    <h3>The Halloumi Burger</h3>
-                   <img src="public/img/halloumiburger.png" alt="The Halloumi Burger" style="width:100%;height:auto;">
+                   <img src="public/img/halloumiburger.png" alt="The Halloumi Burger">
                    <ul>
-                       <li>Contains gluten</li>
-                       <li>Contains lactose</li>
+                       <li><span class="ingredient">Contains gluten</span></li>
+                       <li><span class="ingredient">Contains lactose</span></li>
                        <li>Loaded with cheddar cheese</li>
                        <li>Served with pickles and onions</li>
                    </ul>
                </div>
            </section>
            
-           <section>
+           <section id="customer-information">
                <h2>Customer Information</h2>
                <p>Provide your delivery address and contact details to ensure a smooth delivery process.</p>
                <h3>Delivery Information</h3>
@@ -84,10 +88,10 @@
                </form>
            </section>
            
-        <button type="submit">
-            <img src="public/img/order.png" alt="Order" style="width: 20px; height: 20px;">
-            Submit Order
-        </button>
+           <button type="submit">
+               <img src="public/img/order.png" alt="Order" style="width: 20px; height: 20px;">
+               Submit Order
+           </button>
        </main>
        <hr>
        <footer>

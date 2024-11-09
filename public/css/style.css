@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Cormorant:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 body {
+    font-family: 'DM ans', sans-serif;
     font-size: 12pt;
 }
 
@@ -11,12 +12,14 @@ h1 {
     font-family: 'Agbalumo';
     font-size: 36pt;
 }
+
 main, header, footer, nav ul {
     max-width: 40rem;
     margin: 0 auto 0 auto;
 }
+
 main {
-    background-color: bisque;
+    background-color: white;
 }
 
 /* nav ul li {
@@ -27,12 +30,35 @@ main {
 } */
 
 header {
-    background-image: url("../img/polacks.jpg");
-    background-size: cover;
     overflow: hidden;
+    position: relative;
+}
+
+.header-content {
+    text-align: center;
+    margin: 20px;
+}
+
+.header-content img {
     width: 100%;
-    height: 200px;
-    opacity: 0.5;
+    height: auto;
+    opacity: 0.5; 
+}
+
+.header-content h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    color: white; /* Ensure the text is readable on the image */
+    z-index: 1;
+    text-shadow: 
+        -1px -1px 0 #000, 
+        1px -1px 0 #000, 
+        -1px 1px 0 #000, 
+        1px 1px 0 #000;
 }
 
 header h1 {
@@ -45,20 +71,46 @@ nav ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, 9.25em);
     gap: 1em;
-    padding: 0;
 }
 
-nav li {
-    display: block;
-    background-color: grey;
-    padding: 1em;
+section {
+    margin: 20px;
+    padding: 20px;
+    border: 2px dashed;
 }
 
-.Very-good {
-    color: green;
+#burger-selection {
+    background-color: black;
+    color: white;
+    border-color: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Increased the minimum size */
+    gap: 20px;
 }
 
-.Master {
-    color: green;
+#customer-information {
+    border-color: black;
+}
+
+.ingredient {
     font-weight: bold;
+}
+
+button {
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: lightgray;
+}
+
+#burger-selection div {
+    padding: 10px;
+    margin: 10px;
+}
+#burger-selection img {
+    width: 100%;
+    height: 150px; /* Set a fixed height for the images */
+    object-fit: cover; /* Ensure the images maintain their aspect ratio */
 }
