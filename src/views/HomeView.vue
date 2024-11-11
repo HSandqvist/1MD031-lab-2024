@@ -68,6 +68,7 @@
 <script>
 import Burger from '../components/OneBurger.vue'
 import io from 'socket.io-client'
+import menu from '../assets/menu.json'
 
 const socket = io("localhost:3000");
 
@@ -86,6 +87,8 @@ const burgers = [
   new MenuItem("Halloumi Burger", "public/img/halloumiburger.png", 850, true, true)
 ];
 
+// TODO: fix the path to the images
+
 export default {
   name: 'HomeView',
   components: {
@@ -93,7 +96,7 @@ export default {
   },
   data: function () {
     return {
-      burgers: burgers
+      burgers: menu
     }
   },
   methods: {
