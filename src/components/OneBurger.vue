@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{ burger.name }}</h3>
-    <img :src="burger.imageUrl" :alt="burger.name">
+    <img :src="burger.url" :alt="burger.name">
     <ul>
       <li><span class="ingredient" v-if="!burger.containsGluten">Contains no gluten</span><span class="ingredient" v-else>Contains gluten</span></li>
       <li><span class="ingredient" v-if="!burger.containsLactose">Contains no lactose</span><span class="ingredient" v-else>Contains lactose</span></li>

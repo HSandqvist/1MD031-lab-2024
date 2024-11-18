@@ -1,7 +1,7 @@
 [{
     "name": "Classic Burger", 
     "kCal": 250, 
-    "url": "file:///home/hampus/Documents/dv/interfaceprog/1MD031-lab-2024/public/img/classicburger.png",
+    "url": "/img/classicburger.png",
     "lactose": true, 
     "gluten": true
 },
