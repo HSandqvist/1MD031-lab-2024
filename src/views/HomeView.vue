@@ -13,7 +13,7 @@
               <p>Choose from our wide variety of delicious burgers to satisfy your cravings.</p>
         
               <div v-for="burger in burgers" :key="burger.name">
-                 <Burger :burger="burger" />
+                 <Burger :burger="burger" @orderedBurger="addToOrder" />
               </div>
           </section>
            
@@ -24,36 +24,39 @@
                
                <form>
                    <label for="name">First and Last Name:</label><br>
-                   <input type="text" id="name" name="name" placeholder="John Doe"><br><br>
-                   
+                   <input type="text" id="name" v-model="name" placeholder="John Doe"><br><br>
+
                    <label for="email">E-mail Address:</label><br>
-                   <input type="email" id="email" name="email" placeholder="john.doe@example.com"><br><br>
-                   
-                   <label for="street">Street:</label><br>
-                   <input type="text" id="street" name="street" placeholder="123 Main St"><br><br>
-                   
-                   <label for="house-number">House Number:</label><br>
-                   <input type="text" id="house-number" name="house-number" placeholder="123" pattern="\d+" title="Please enter a valid house number"><br><br>
-                   
+                   <input type="email" id="email" v-model="email" placeholder="john.doe@example.com"><br><br>
+
                    <label for="payment-method">Payment Method:</label><br>
-                   <select id="payment-method" name="payment-method">
-                       <option value="credit-card" selected>Credit Card</option>
+                   <select id="payment-method" v-model="paymentMethod">
+                       <option value="credit-card">Credit Card</option>
                        <option value="paypal">PayPal</option>
                        <option value="bank-transfer">Bank Transfer</option>
                        <option value="cash-on-delivery">Cash on Delivery</option>
                    </select><br><br>
                    
                    <label>Gender:</label><br>
-                   <input type="radio" id="male" name="gender" value="male" checked>
+                   <input type="radio" id="male" v-model="gender" value="male" checked>
                    <label for="male">Male</label><br>
-                   <input type="radio" id="female" name="gender" value="female">
+                   <input type="radio" id="female" v-model="gender" value="female">
                    <label for="female">Female</label><br>
-                   <input type="radio" id="no-gender" name="gender" value="no-gender">
+                   <input type="radio" id="no-gender" v-model="gender" value="no-gender">
                    <label for="no-gender">Do not wish to provide</label><br><br>
                </form>
            </section>
+
+           <div id="map-container">
+                <div id="map" v-on:click="addOrder">
+                <div class="dot" 
+                v-bind:style="{ top: (clickLocation ? clickLocation.y : 0) + 'px', 
+                                left: (clickLocation ? clickLocation.x : 0) + 'px' }">T</div>
+                </div> 
+           </div>
+            
            
-           <button type="submit">
+           <button type="submit" v-on:click="printFormValues">
                <img src="/public/img/order.png" alt="Order" style="width: 20px; height: 20px;">
                Submit Order
            </button>
@@ -96,7 +99,13 @@ export default {
   },
   data: function () {
     return {
-      burgers: menu
+      burgers: menu,
+      orderedBurgers: {},
+      name: '',
+      email: '',
+      paymentMethod: "credit-card",
+      gender: 'male',
+      clickLocation: null // Add clickLocation to the data object
     }
   },
   methods: {
@@ -104,14 +113,31 @@ export default {
       return Math.floor(Math.random()*100000);
     },
     addOrder: function (event) {
-      var offset = {x: event.currentTarget.getBoundingClientRect().left,
+        var offset = {x: event.currentTarget.getBoundingClientRect().left,
                     y: event.currentTarget.getBoundingClientRect().top};
+        var clickX = event.clientX - offset.x;
+        var clickY = event.clientY - offset.y;
+        this.clickLocation = {x: clickX, y: clickY};
       socket.emit("addOrder", { orderId: this.getOrderNumber(),
                                 details: { x: event.clientX - 10 - offset.x,
                                            y: event.clientY - 10 - offset.y },
                                 orderItems: ["Beans", "Curry"]
                               }
                  );
+    },
+    // addToOrder: function (event) {
+    //     this.$set(this.orderedBurgers, event.name, event.amount);
+    // },
+    addToOrder: function (event) {
+        this.orderedBurgers[event.name] = event.amount;
+    },
+    printFormValues: function () {
+      console.log("Name: " + this.name);
+      console.log("Email: " + this.email);
+      console.log("Payment Method: " + this.paymentMethod);
+      console.log("Gender: " + this.gender);
+      console.log("Ordered Burgers: ", this.orderedBurgers);
+      console.log("Click Location: ", this.clickLocation);
     }
   }
 }
@@ -134,7 +160,7 @@ h1 {
 }
 
 main, header, footer, nav ul {
-    max-width: 40rem;
+    max-width: 100%;
     margin: 0 auto 0 auto;
 }
 
@@ -233,5 +259,27 @@ button:hover {
     width: 100%;
     height: 150px; /* Set a fixed height for the images */
     object-fit: cover; /* Ensure the images maintain their aspect ratio */
+}
+
+#map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#map {
+    width: 1920px;
+    height: 1078px;
+    background: url('/public/img/polacks.jpg');
+    overflow: scroll;
+    position: relative
+  }
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    border-radius: 50%;
+    position: absolute;
 }
 </style>

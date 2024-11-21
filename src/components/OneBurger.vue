@@ -7,6 +7,11 @@
       <li><span class="ingredient" v-if="!burger.containsLactose">Contains no lactose</span><span class="ingredient" v-else>Contains lactose</span></li>
       <li>{{ burger.kCal }} kCal</li>
     </ul>
+    <div>
+      <p>Amount Ordered: {{ amountOrdered }}</p>
+      <button @click="increaseQuantity">+</button>
+      <button @click="decreaseQuantity">-</button>
+    </div>
   </div>
 </template>
 
@@ -15,6 +20,23 @@ export default {
   name: 'OneBurger',
   props: {
     burger: Object
+  },
+  data() {
+    return {
+      amountOrdered: 0
+    };
+  },
+  methods: {
+    increaseQuantity() {
+      this.amountOrdered++;
+      this.$emit('orderedBurger', { name: this.burger.name, amount: this.amountOrdered });
+    },
+    decreaseQuantity() {
+      if (this.amountOrdered > 0) {
+        this.amountOrdered--;
+        this.$emit('orderedBurger', { name: this.burger.name, amount: this.amountOrdered });
+      }
+    }
   }
 }
 </script>
