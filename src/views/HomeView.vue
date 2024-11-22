@@ -36,6 +36,14 @@
                        <option value="bank-transfer">Bank Transfer</option>
                        <option value="cash-on-delivery">Cash on Delivery</option>
                    </select><br><br>
+
+                   <div id="map-container">
+                        <div id="map" v-on:click="setLocation">
+                        <div class="dot" 
+                        v-bind:style="{ top: (clickLocation ? clickLocation.y : 0) + 'px', 
+                                        left: (clickLocation ? clickLocation.x : 0) + 'px' }">T</div>
+                        </div> 
+                </div>
                    
                    <label>Gender:</label><br>
                    <input type="radio" id="male" v-model="gender" value="male" checked>
@@ -47,16 +55,10 @@
                </form>
            </section>
 
-           <div id="map-container">
-                <div id="map" v-on:click="addOrder">
-                <div class="dot" 
-                v-bind:style="{ top: (clickLocation ? clickLocation.y : 0) + 'px', 
-                                left: (clickLocation ? clickLocation.x : 0) + 'px' }">T</div>
-                </div> 
-           </div>
+           
             
            
-           <button type="submit" v-on:click="printFormValues">
+           <button type="submit" v-on:click="placeOrder">
                <img src="/public/img/order.png" alt="Order" style="width: 20px; height: 20px;">
                Submit Order
            </button>
@@ -112,32 +114,37 @@ export default {
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);
     },
-    addOrder: function (event) {
+    setLocation: function (event) {
         var offset = {x: event.currentTarget.getBoundingClientRect().left,
                     y: event.currentTarget.getBoundingClientRect().top};
         var clickX = event.clientX - offset.x;
         var clickY = event.clientY - offset.y;
-        this.clickLocation = {x: clickX, y: clickY};
-      socket.emit("addOrder", { orderId: this.getOrderNumber(),
-                                details: { x: event.clientX - 10 - offset.x,
-                                           y: event.clientY - 10 - offset.y },
-                                orderItems: ["Beans", "Curry"]
-                              }
-                 );
+        this.clickLocation = { x: clickX, y: clickY };
     },
-    // addToOrder: function (event) {
-    //     this.$set(this.orderedBurgers, event.name, event.amount);
-    // },
     addToOrder: function (event) {
         this.orderedBurgers[event.name] = event.amount;
     },
-    printFormValues: function () {
+    placeOrder: function () {
       console.log("Name: " + this.name);
       console.log("Email: " + this.email);
       console.log("Payment Method: " + this.paymentMethod);
       console.log("Gender: " + this.gender);
       console.log("Ordered Burgers: ", this.orderedBurgers);
       console.log("Click Location: ", this.clickLocation);
+
+      const orderItems = Object.entries(this.orderedBurgers).map(([name, amount]) => `${name} (${amount})`);
+
+      socket.emit("addOrder", { orderId: this.getOrderNumber(),
+                                details: { x: this.clickLocation.x, y: this.clickLocation.y },
+                                orderItems: orderItems,
+                                customerInfo: {
+                                    name: this.name,
+                                    email: this.email,
+                                    paymentMethod: this.paymentMethod,
+                                    gender: this.gender
+                                }
+                              }
+                 );
     }
   }
 }
@@ -151,7 +158,7 @@ body {
 }
 
 p {
-    color: red;
+    color: black;
 }
 
 h1 {
@@ -167,13 +174,6 @@ main, header, footer, nav ul {
 main {
     background-color: white;
 }
-
-/* nav ul li {
-    display: inline-block;
-    background-color: grey;
-    padding: 1em;
-    margin: 1em;
-} */
 
 header {
     overflow: hidden;
@@ -234,6 +234,10 @@ section {
     gap: 20px;
 }
 
+#burger-selection p {
+    color: white;
+}
+
 #customer-information {
     border-color: black;
 }
@@ -271,8 +275,8 @@ button:hover {
     width: 1920px;
     height: 1078px;
     background: url('/public/img/polacks.jpg');
-    overflow: scroll;
-    position: relative
+    position: relative;
+    overflow: scroll
   }
 
 .dot {
